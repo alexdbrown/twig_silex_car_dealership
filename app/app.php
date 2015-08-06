@@ -11,7 +11,8 @@
     $app['debug'] = true;
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('results.html.twig');//, array('cars' => Car::getAll()));
+        $car = new Car($_GET['price'], $_GET['miles']);
+        return $app['twig']->render('cars.html.twig', array('cars' => $car));
 
     });
 
@@ -30,7 +31,6 @@
           }
 
           $output = "";
-
 
           if (empty($cars_matching_search)) {
                   echo "<h1>Uh oh! No cars available for you.<h1>";

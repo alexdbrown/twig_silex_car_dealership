@@ -1,19 +1,25 @@
 <html>
-<head>
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='/web/car.css' type='text/css' media='all'>
-    <title>Results!!</title>
-</head>
-<body>
-  <h1>Find YOUR new car...</h1>
-  {% if cars is not empty %}
-    <p>Find your new car:</p>
-    <ul>
-      {% for cars in car %}
-        <li>Type:{{ car.getMake }}</li>
-        <li><img src= {{ car.getImage }}></li>
-        <li>Miles: {{ car.getMiles }}</li>
-        <li>Price: ${{ car.getPrice }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+    <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='/car.css' type='text/css' media='all'>
+        <title>Search Results!!</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Find YOUR new car...</h1>
+            {% if cars is not empty %}
+                <p>Find your new car:</p>
+                <ul>
+                    {% for car in cars %}
+                        <li>Type:{{ car.getMake }}</li>
+                        <li><img src= {{ car.getImage }}></li>
+                        <li>Miles: {{ car.getMiles }}</li>
+                        <li>Price: ${{ car.getPrice }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <p>No cars for yoU!</p>
+            {% endif %}
+        </div>
+    </body>
+</html>

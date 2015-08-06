@@ -4,7 +4,7 @@
 
     session_start();
     if (empty($_SESSION['list_of_cars'])) {
-      $_SESSION['list_of_car'] = array();
+      $_SESSION['list_of_cars'] = array();
     }
 
     $app = new Silex\Application();
@@ -13,15 +13,14 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
-    // $app['debug'] = true;
+     $app['debug'] = true;
 
     $app->get("/", function() use ($app) {
-      // $cars = new Car($_GET["price"],$_GET["mileags"]);
-      return $app['twig']->render('cars.html.twig'); //array('cars' => $cars));
+      return $app['twig']->render('cars.html.twig', array('cars' => Car::getAll()));
 
     });
 
-    $app->get("/buyer_results", function() {
+    $app->get("/buyer_results", function() use ($app) {
         $first_car = new Car("Toyota Camry", 5500, 160000, "img/camry.jpg");
         $second_car = new Car("Honda CRV", 7500, 140000, "img/crv.jpg");
         $third_car = new Car("Suburu Legacy", 7900, 130000, "img/legacy.jpg");
@@ -35,29 +34,14 @@
               }
           }
 
-          $output = "";
+        return $app['twig']->render('buyer_results.html.twig', array('cars' => $cars_matching_search));
+    });
 
-          if (empty($cars_matching_search)) {
-                  echo "<h1>Uh oh! No cars available for you.<h1>";
-              } else {
-                foreach ($cars_matching_search as $car) {
-                    $car_make = $car->getMake();
-                    $car_price = $car->getPrice();
-                    $car_miles = $car->getMiles();
-                    $car_image = $car->getImage();
-
-                    $output = $output . "
-
-                    <h3>" . $car_make . "<h3>
-                   <img src=" . $car_image .">
-                    <ul>
-                         <li> $" . $car_price . "</li>
-                         <li> Miles: " . $car_miles . "</li>
-                     </ul>";
-                  }
-              }
-              return $output;
-
+    $app->post("/seller_results", function() use ($app) {
+      $cars = new Car($_POST['make'], $_POST['miles'], $_POST['price'], $_POST['image']);
+      $list_of_cars = array($cars);
+      $cars->save();
+      return $app['twig']->render('seller_results.html.twig', array('cars' => Car::getAll()));
     });
 
     return $app;

@@ -1,0 +1,19 @@
+<html>
+<head>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='car.css' type='text/css' media='all'>
+    <title>Car Specs</title>
+</head>
+<body>
+  <h1>Here are the specs of the car you'd like to sell:</h1>
+  {% if cars is not empty %}
+    <p>Find your new car:</p>
+    <ul>
+      {% for cars in car %}
+        <li>Type:{{ car.getMake }}</li>
+        <li><img src= {{ car.getImage }}></li>
+        <li>Miles: {{ car.getMiles }}</li>
+        <li>Price: ${{ car.getPrice }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}

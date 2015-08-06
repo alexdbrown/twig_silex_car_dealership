@@ -21,7 +21,7 @@
 
     });
 
-    $app->get("/results", function() {
+    $app->get("/buyer_results", function() {
         $first_car = new Car("Toyota Camry", 5500, 160000, "img/camry.jpg");
         $second_car = new Car("Honda CRV", 7500, 140000, "img/crv.jpg");
         $third_car = new Car("Suburu Legacy", 7900, 130000, "img/legacy.jpg");

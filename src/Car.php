@@ -56,6 +56,15 @@
         {
             return $this->image;
         }
-        
+
+        function worthBuying($user_price, $user_miles)
+        {
+           if ($this->price < $user_price && $this->miles < $user_miles) {
+              return true;
+           } else {
+              return false;
+           }
+        }
+
     }
 ?>

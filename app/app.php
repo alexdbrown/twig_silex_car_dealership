@@ -4,8 +4,14 @@
 
     $app = new Silex\Application();
 
+    $app->register(new Silex\Provider\TwigServiceProvider(), array(
+        'twig.path' => __DIR__.'/../views'
+    ));
+
+    $app['debug'] = true;
+
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('cars.html.twig', array('cars' => Car::getAll()));
+        return $app['twig']->render('results.html.twig');//, array('cars' => Car::getAll()));
 
     });
 
@@ -17,18 +23,9 @@
         $cars = array($first_car, $second_car, $third_car, $fourth_car);
 
         $cars_matching_search = array();
-
-        foreach ($cars as $car) {
-          if (empty($_GET["price"])) {
-            if ($car_miles < $_GET["miles"]) {
-              array_push($cars_matching_search, $car);
-            }
-          } elseif (empty($_GET["miles"])) {
-              if ($car_price < $_GET["price"]) {
-                array_push($cars_matching_search, $car);
-              }
-          } elseif ($car_price < $_GET["price"] && $car_miles < $_GET["miles"]) {
-            array_push($cars_matching_search, $car);
+          foreach ($cars as $car) {
+              if ($car->worthBuying ($_GET["price"],$_GET["miles"])) {
+                  array_push($cars_matching_search, $car);
               }
           }
 

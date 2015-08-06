@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Find YOUR new car...</h1>
-  {% if cars is not empty %}
+  {#{% if cars is not empty %}
     <p>Find your new car:</p>
     <ul>
       {% for cars in car %}
@@ -13,11 +13,11 @@
         <li><img src= {{ car.getImage }}></li>
         <li>Miles: {{ car.getMiles }}</li>
         <li>Price: ${{ car.getPrice }}</li>
-      {% end for %}
+      {% endfor %}
     </ul>
-  {% endif %}
+  {% endif %}#}
 
-    <form action='/buyCar'>
+    <form action='/car'>
       <div class='form-group'>
         <label for='price'>Enter your max price: $</label>
         <input id='price' name='price' class='form-control' type='number'>

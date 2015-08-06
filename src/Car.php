@@ -56,5 +56,6 @@
         {
             return $this->image;
         }
+        
     }
 ?>

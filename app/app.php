@@ -2,21 +2,26 @@
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/car.php";
 
+    session_start();
+    if (empty($_SESSION['list_of_cars'])) {
+      $_SESSION['list_of_car'] = array();
+    }
+
     $app = new Silex\Application();
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
 
-    $app['debug'] = true;
+    // $app['debug'] = true;
 
     $app->get("/", function() use ($app) {
-        $car = new Car($_GET['price'], $_GET['miles']);
-        return $app['twig']->render('cars.html.twig', array('cars' => $car));
+      // $cars = new Car($_GET["price"],$_GET["mileags"]);
+      return $app['twig']->render('cars.html.twig'); //array('cars' => $cars));
 
     });
 
-    $app->get("/car", function() {
+    $app->get("/results", function() {
         $first_car = new Car("Toyota Camry", 5500, 160000, "img/camry.jpg");
         $second_car = new Car("Honda CRV", 7500, 140000, "img/crv.jpg");
         $third_car = new Car("Suburu Legacy", 7900, 130000, "img/legacy.jpg");

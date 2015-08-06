@@ -66,5 +66,16 @@
            }
         }
 
+        static function getAll()
+        {
+          return $_SESSION['list_of_cars'];
+        }
+
+        function save()
+        {
+          array_push($_SESSION['list_of_cars'], $this);
+        }
+
+
     }
 ?>

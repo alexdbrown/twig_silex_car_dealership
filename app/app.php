@@ -38,10 +38,10 @@
     });
 
     $app->post("/seller_results", function() use ($app) {
-      $cars = new Car($_POST['make'], $_POST['miles'], $_POST['price'], $_POST['image']);
+      $cars = new Car($_POST['model'], $_POST['mileage'], $_POST['cost'], $_POST['photo']);
       $list_of_cars = array($cars);
       $cars->save();
-      return $app['twig']->render('seller_results.html.twig', array('cars' => Car::getAll()));
+      return $app['twig']->render('seller_results.html.twig', array('cars' => Car::getAll());
     });
 
     return $app;

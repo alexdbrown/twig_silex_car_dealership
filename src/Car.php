@@ -6,12 +6,23 @@
         private $miles;
         private $image;
 
-        function __construct($make, $price, $miles, $image)
+  //The below propoerties are for the "post" function
+
+        private $model;
+        private $mileage;
+        private $cost;
+        private $photo;
+
+        function __construct($make, $price, $miles, $image, $model, $mileage, $cost, $photo)
         {
             $this->make_model = $make;
             $this->price = $price;
             $this->miles = $miles;
             $this->image = $image;
+            $this->model = $model;
+            $this->mileage = $mileage;
+            $this->cost = $cost;
+            $this->photo = $photo;
         }
 
         function setMake($new_make)
@@ -55,6 +66,46 @@
         function getImage()
         {
             return $this->image;
+        }
+
+        function setModel($new_model)
+        {
+          $this->model = $new_model;
+        }
+
+        function getModel()
+        {
+          return $this->model;
+        }
+
+        function setMileage($new_mileage)
+        {
+          $this->mileage = $new_mileage;
+        }
+
+        function getMileage()
+        {
+          return $this->mileage;
+        }
+
+        function setCost($new_cost)
+        {
+          $this->cost = $new_cost;
+        }
+
+        function getCost()
+        {
+          return $this->cost;
+        }
+
+        function setPhoto($new_photo)
+        {
+          $this->photo = $new_photo;
+        }
+
+        function getPhoto()
+        {
+          return $this->photo;
         }
 
         function worthBuying($user_price, $user_miles)
